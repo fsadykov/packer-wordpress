@@ -9,4 +9,9 @@ node {
     sh 'packer validate packer-wordpres.json'
   }
 
+  stage('check for secrets') {
+    withCredentials([string(credentialsId: 'aws_access_key', variable: 'PW1')]) {
+        echo "My password is '${PW1}'!"
+    }
+  }
 }
