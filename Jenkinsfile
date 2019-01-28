@@ -14,4 +14,8 @@ node {
         echo "My password is '${PW1}'!"
     }
   }
+
+  stage('check for secrets') {
+    echo "${aws_access_key}"
+  }
 }
