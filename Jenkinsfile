@@ -9,13 +9,15 @@ node {
     sh 'packer validate packer-wordpres.json'
   }
 
-  stage('check for secrets') {
-    withCredentials([string(credentialsId: 'aws_access_key', variable: 'PW1')]) {
-        echo "My password is '${PW1}'!"
-    }
-  }
 
-  stage('check for secrets') {
-    echo "${aws_access_key}"
+
+  properties([
+    parameters([
+      string(name: 'DEPLOY_ENV', defaultValue: 'TESTING', description: 'The target environment', )
+     ])
+  ])
+
+  stage('check for parameters') {
+    echo "${DEPLOY_ENV}"
   }
 }
